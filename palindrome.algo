@@ -1,0 +1,38 @@
+PROCEDURE palindrome(VAR tab :ARRAY_OF CHAR)
+VAR
+   i, j: INTEGER;
+   cle: CHAR;
+BEGIN
+   FOR i FROM 1 TO tab.length - 1 DO
+       cle := tab[i];
+       j := i - 1;
+
+       WHILE j >= 0 AND tab[j] > cle DO
+           tab[j + 1] := tab[j];
+           j := j - 1;
+       END_WHILE;
+
+       tab[j + 1] := cle;
+   END_FOR;
+END;
+
+PROCEDURE palindrome_verifier(VAR word : tabAY_OF CHAR)
+VAR
+   original_word: tabAY_OF CHAR;
+BEGIN
+   original_word := word;
+   palindrome(word);
+
+   IF word = original_word THEN
+       OUTPUT "The word is a palindrome.";
+   ELSE
+       OUTPUT "The word is not a palindrome.";
+   END_IF;
+END;
+
+VAR
+   mot_verifier: tabAY_OF CHAR;
+BEGIN
+   mot_verifier := "radar";
+   palindrome_verifier(mot_verifier);
+END.
